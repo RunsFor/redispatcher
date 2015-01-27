@@ -65,6 +65,26 @@
 <span class="pl-k">class</span> <span class="pl-en">TopicDispatcher<span class="pl-e"> &lt; Redispatcher::Dispatcher</span></span>
 <span class="pl-k">end</span></pre></div>
 
+<p>Do not hesitate to use dispatscher's callbacks <code>before_</code> and <code>after_</code> <code>initialize</code>, <code>process</code>, <code>commit</code>, <code>rollback</code> just like that:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># app/dispatchers/topic_dispatcher.rb</span>
+<span class="pl-k">class</span> <span class="pl-en">TopicDispatcher<span class="pl-e"> &lt; Redispatcher::Dispatcher</span></span>
+
+  after_initialize <span class="pl-k">do</span>
+    <span class="pl-vo">@processed_object</span> <span class="pl-k">=</span> {}
+  <span class="pl-k">end</span>
+
+  before_process <span class="pl-k">do</span>
+    <span class="pl-vo">@processed_object</span>.merge! <span class="pl-c1">title:</span> object.title
+  <span class="pl-k">end</span>
+
+  after_commit <span class="pl-c1">:update_mongodb</span>
+
+  <span class="pl-k">def</span> <span class="pl-en">update_mongodb</span>
+    <span class="pl-s3">MONGO</span>[<span class="pl-s1"><span class="pl-pds">'</span>topics<span class="pl-pds">'</span></span>].update({ <span class="pl-c1">id:</span> object.id }, processed_object, <span class="pl-c1">upsert:</span> <span class="pl-c1">true</span>)
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
 <h3>
 <a id="enable-dispatcher-for-your-model" class="anchor" href="#enable-dispatcher-for-your-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enable dispatcher for your model</h3>
 
