@@ -62,13 +62,21 @@
 <h3>
 <a id="writing-dispatchers" class="anchor" href="#writing-dispatchers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Writing Dispatchers</h3>
 
-<p>Dispatchers inherit from <code>Redispatcher::Dispatcher</code>, live in your <code>app/dispatchers</code> directory, and are named for the model that they dispatch:</p>
+<p>Dispatchers inherit from <code>Redispatcher::Dispatcher</code>, live in your <code>app/dispatchers</code> directory, and are named for the model that they dispatch.</p>
+
+<p>You can use rails generator to generate dispatcher:</p>
+
+<pre><code>rails g dispatcher Topic
+</code></pre>
+
+<p>This will create TopicDispatcher:</p>
 
 <div class="highlight highlight-ruby"><pre><span class="pl-c"># app/dispatchers/topic_dispatcher.rb</span>
 <span class="pl-k">class</span> <span class="pl-en">TopicDispatcher<span class="pl-e"> &lt; Redispatcher::Dispatcher</span></span>
+  <span class="pl-c"># ...</span>
 <span class="pl-k">end</span></pre></div>
 
-<p>Do not hesitate to use dispatscher's callbacks <code>before_</code> and <code>after_</code> <code>initialize</code>, <code>process</code>, <code>commit</code>, <code>rollback</code> just like that:</p>
+<p>Do not hesitate to use dispatscher's callbacks <code>before_initialize</code>, <code>after_initialize</code>, <code>before_process</code>, <code>after_process</code>, <code>before_commit</code>, <code>after_commit</code>, <code>before_rollback</code>, <code>after_rollback</code> just like that:</p>
 
 <div class="highlight highlight-ruby"><pre><span class="pl-c"># app/dispatchers/topic_dispatcher.rb</span>
 <span class="pl-k">class</span> <span class="pl-en">TopicDispatcher<span class="pl-e"> &lt; Redispatcher::Dispatcher</span></span>
