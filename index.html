@@ -31,13 +31,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p><img src="https://zhf.io/raw/p8IRct" alt="This is really cool dispatcher. However es6-dispatcher is really piece of crap"></p>
+        <p><img src="https://zhf.io/p8IRct/raw" alt="Redispatcher"></p>
 
 <p><a href="http://badge.fury.io/rb/redispatcher"><img src="https://badge.fury.io/rb/redispatcher.svg" alt="Gem Version"></a>
 <a href="https://codeclimate.com/github/rambler-digital-solutions/redispatcher"><img src="https://codeclimate.com/github/rambler-digital-solutions/redispatcher/badges/gpa.svg" alt="Code Climate"></a>
-<a href="https://codeclimate.com/github/rambler-digital-solutions/redispatcher"><img src="https://codeclimate.com/github/rambler-digital-solutions/redispatcher/badges/coverage.svg" alt="Test Coverage"></a></p>
+<a href="https://codeclimate.com/github/rambler-digital-solutions/redispatcher"><img src="https://codeclimate.com/github/rambler-digital-solutions/redispatcher/badges/coverage.svg" alt="Test Coverage"></a>
+<a href="https://travis-ci.org/rambler-digital-solutions/redispatcher"><img src="https://travis-ci.org/rambler-digital-solutions/redispatcher.svg?branch=master" alt="Build Status"></a></p>
 
-<p>Dispatch ActiveRecord objects to any structures with ease.</p>
+<p>This gem provides delivery of objects from database to any structure with power of callbacks.</p>
+
+<p>Supporting ORM are ActiveRecord and Sequel (through <a href="https://github.com/TalentBox/sequel-rails">sequel-rails</a> gem)</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -99,7 +102,15 @@
 <h3>
 <a id="enable-dispatcher-for-your-model" class="anchor" href="#enable-dispatcher-for-your-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enable dispatcher for your model</h3>
 
+<p>With ActiveRecord:</p>
+
 <div class="highlight highlight-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">Topic<span class="pl-e"> &lt; ActiveRecord::Base</span></span>
+  dispatchable
+<span class="pl-k">end</span></pre></div>
+
+<p>With Sequel:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">Topic<span class="pl-e"> &lt; Sequel::Model</span></span>
   dispatchable
 <span class="pl-k">end</span></pre></div>
 
@@ -109,6 +120,11 @@
 <p>Just call dispatch method on object you going to dispatch.</p>
 
 <div class="highlight highlight-ruby"><pre>dispatched_topic <span class="pl-k">=</span> <span class="pl-s3">Topic</span>.first.dispatch</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Redispatcher is licensed under the MIT license. See LICENSE for full license text.</p>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
